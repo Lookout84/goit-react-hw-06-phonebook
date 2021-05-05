@@ -75,8 +75,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1>Home work #3_1</h1>
-        <h2>Phonebook</h2>
+        <h1>Phonebook</h1>
         <ContactForm onAddNewContact={this.addNewContact} />
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.changeFilterContacts} />
