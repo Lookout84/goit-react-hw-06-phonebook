@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import style from './ContactList.module.css';
+import { connect } from 'react-redux';
+import contactsActions from '../../redux/actions';
 
 const ContactList = ({ contacts, onDaleteContact }) => (
   <ul className={style.list}>
@@ -19,6 +21,12 @@ const ContactList = ({ contacts, onDaleteContact }) => (
   </ul>
 );
 
+const mapDispatchToProps = dispatch => ({
+  onDeleteContact: id => dispatch(contactsActions.deleteContact(id)),
+});
+
+export default connect(null, mapDispatchToProps)(ContactList);
+
 ContactList.propTypes = {
   onDaleteContact: PropTypes.func.isRequired,
   contacts: PropTypes.arrayOf(
@@ -29,5 +37,3 @@ ContactList.propTypes = {
     }),
   ),
 };
-
-export default ContactList;

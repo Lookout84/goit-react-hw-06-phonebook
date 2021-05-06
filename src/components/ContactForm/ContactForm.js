@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './ContactForm.module.css';
+import { connect } from 'react-redux';
+import contactsActions from '../../redux/actions';
 
 class ContactForm extends Component {
   state = {
@@ -56,10 +58,19 @@ class ContactForm extends Component {
   }
 }
 
+// const mapStateToProps = state => {
+//   return { state };
+// };
+
+const mapDispatchToProps = dispatch => ({
+  onSubmit: ({ name, number }) =>
+    dispatch(contactsActions.addNewContact(name, number)),
+});
+
+export default connect(null, mapDispatchToProps)(ContactForm);
+
 ContactForm.propTypes = {
   onAddNewContact: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
 };
-
-export default ContactForm;

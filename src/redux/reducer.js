@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { addNewContact, deleteContact, filterContact } from './actions';
+// import { addNewContact, deleteContact, filterContact } from './actions';
 import { ADD, DELETE, FILTER } from './types';
 
 // const initState = {
