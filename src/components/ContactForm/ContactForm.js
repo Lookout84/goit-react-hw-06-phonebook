@@ -11,7 +11,7 @@ class ContactForm extends Component {
   };
 
   handleChange = e => {
-    const { name, value } = e.target;
+    const { name, value } = e.currentTarget;
     this.setState({
       [name]: value,
     });
@@ -19,7 +19,17 @@ class ContactForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.onAddNewContact({ ...this.state });
+    const { name, number } = this.state;
+    const { contacts, onSubmit } = this.props;
+    if (contacts.some(elm => elm.name.toLowerCase() === name.toLowerCase())) {
+      return alert(`${name} is already in contacts`);
+    }
+    if (
+      contacts.some(elm => elm.number.toLowerCase() === number.toLowerCase())
+    ) {
+      return alert(`${number} is already in contacts`);
+    }
+    onSubmit(this.state);
     this.setState({ name: '', number: '' });
   };
 
@@ -46,7 +56,7 @@ class ContactForm extends Component {
               type="text"
               name="number"
               value={number}
-              onChange={this.handleChange}
+              onChange={handleChange}
             />
           </label>
           <button className={style.button} type="submit">
@@ -62,15 +72,19 @@ class ContactForm extends Component {
 //   return { state };
 // };
 
+const mapStateToProps = state => ({
+  contacts: state.contacts.items,
+});
+
 const mapDispatchToProps = dispatch => ({
   onSubmit: ({ name, number }) =>
     dispatch(contactsActions.addNewContact(name, number)),
 });
 
-export default connect(null, mapDispatchToProps)(ContactForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
 
 ContactForm.propTypes = {
-  onAddNewContact: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
-  number: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  // name: PropTypes.string.isRequired,
+  // number: PropTypes.string.isRequired,
 };
