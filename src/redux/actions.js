@@ -34,6 +34,5 @@ const deleteContact = createAction('contacts/DeleteContact');
 
 const filterContact = createAction('contacts/FilterContact');
 
-const actionsExport = { addNewContact, deleteContact, filterContact };
-
-export default actionsExport;
+// eslint-disable-next-line import/no-anonymous-default-export
+export default { addNewContact, deleteContact, filterContact };

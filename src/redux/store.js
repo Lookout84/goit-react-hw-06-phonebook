@@ -1,6 +1,5 @@
 // import { createStore, combineReducers } from 'redux';
 // import { composeWithDevTools } from 'redux-devtools-extension';
-import phoneReducer from './reducer';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import {
@@ -14,6 +13,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import phoneReducer from './reducer';
 
 // const rootReducer = combineReducers({
 //   contacts: phoneReducer,
@@ -47,6 +47,5 @@ const store = configureStore({
 
 const persistor = persistStore(store);
 
-const storeExport = { store, persistor };
-
-export default storeExport;
+// eslint-disable-next-line import/no-anonymous-default-export
+export default { store, persistor };

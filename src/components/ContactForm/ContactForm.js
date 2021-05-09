@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './ContactForm.module.css';
 import { connect } from 'react-redux';
-import actionsExport from '../../redux/actions';
+import actions from '../../redux/actions';
 
 class ContactForm extends Component {
   state = {
@@ -15,6 +15,7 @@ class ContactForm extends Component {
     this.setState({
       [name]: value,
     });
+    console.log(this.state);
   };
 
   handleSubmit = e => {
@@ -31,39 +32,37 @@ class ContactForm extends Component {
     }
     onSubmit(this.state);
     this.setState({ name: '', number: '' });
+    console.log(name);
+    console.log(number);
   };
 
   render() {
-    const { name, number } = this.state;
-    const { handleChange, handleSubmit } = this;
     return (
-      <>
-        <form className={style.ContactForm} onSubmit={handleSubmit}>
-          <label className={style.label}>
-            Name
-            <input
-              className={style.input}
-              type="text"
-              name="name"
-              value={name}
-              onChange={handleChange}
-            />
-          </label>
-          <label className={style.label}>
-            Number
-            <input
-              className={style.input}
-              type="text"
-              name="number"
-              value={number}
-              onChange={handleChange}
-            />
-          </label>
-          <button className={style.button} type="submit">
-            Add contact
-          </button>
-        </form>
-      </>
+      <form className={style.ContactForm} onSubmit={this.handleSubmit}>
+        <label className={style.label}>
+          Name
+          <input
+            className={style.input}
+            type="text"
+            name="name"
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+        </label>
+        <label className={style.label}>
+          Number
+          <input
+            className={style.input}
+            type="text"
+            name="number"
+            value={this.state.number}
+            onChange={this.handleChange}
+          />
+        </label>
+        <button className={style.button} type="submit">
+          Add contact
+        </button>
+      </form>
     );
   }
 }
@@ -77,14 +76,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSubmit: ({ name, number }) =>
-    dispatch(actionsExport.addNewContact(name, number)),
+  onSubmit: (name, number) => dispatch(actions.addNewContact(name, number)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
 
 ContactForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  // name: PropTypes.string.isRequired,
-  // number: PropTypes.string.isRequired,
 };

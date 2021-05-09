@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import actionsExport from './actions';
+import actions from './actions';
 // import { ADD, DELETE, FILTER } from './types';
 
 import { createReducer } from '@reduxjs/toolkit';
@@ -38,13 +38,13 @@ import { createReducer } from '@reduxjs/toolkit';
 // };
 
 const items = createReducer([], {
-  [actionsExport.addNewContact]: (state, { payload }) => [...state, payload],
-  [actionsExport.deleteContact]: (state, { payload }) =>
+  [actions.addNewContact]: (state, { payload }) => [...state, payload],
+  [actions.deleteContact]: (state, { payload }) =>
     state.filter(contact => contact.id !== payload),
 });
 
 const filter = createReducer('', {
-  [actionsExport.filterContact]: (_, { payload }) => payload,
+  [actions.filterContact]: (_, { payload }) => payload,
 });
 
 export default combineReducers({ items, filter });

@@ -3,7 +3,6 @@ import ContactForm from '../components/ContactForm/ContactForm';
 import Filter from '../components/Filter/Filter';
 import ContactList from '../components/ContactList/ContactList';
 // import shortid from 'shortid';
-import { connect } from 'react-redux';
 
 class PhoneBook extends Component {
   // state = {
@@ -91,4 +90,4 @@ class PhoneBook extends Component {
   }
 }
 
-export default connect(null, null)(PhoneBook);
+export default PhoneBook;
